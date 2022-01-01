@@ -8,7 +8,6 @@ streamlit_webrtc
 aiortc
 soundfile
 numpy
-queue
 pathlib
 time
 pydub
