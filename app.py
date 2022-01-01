@@ -37,26 +37,24 @@ def word2num (num):
     except:
         return num
     '''
-
-def app():
-    class OpenCVEdgeProcessor(VideoProcessorBase):
-        def recv(self, frame: av.VideoFrame) -> av.VideoFrame:
-            img = frame.to_ndarray(format="bgr24")
+ class OpenCVEdgeProcessor(VideoProcessorBase):
+    def recv(self, frame: av.VideoFrame) -> av.VideoFrame:
+        img = frame.to_ndarray(format="bgr24")
 
             # perform edge detection
-            img = cv2.cvtColor(cv2.Canny(img, 100, 200), cv2.COLOR_GRAY2BGR)
+        img = cv2.cvtColor(cv2.Canny(img, 100, 200), cv2.COLOR_GRAY2BGR)
 
-            return av.VideoFrame.from_ndarray(img, format="bgr24")
+        return av.VideoFrame.from_ndarray(img, format="bgr24")
 
-    def in_recorder_factory() -> MediaRecorder:
-        return MediaRecorder(
-            "input.flv", format="flv"
-        )  # HLS does not work. See https://github.com/aiortc/aiortc/issues/331
+def in_recorder_factory() -> MediaRecorder:
+    return MediaRecorder(
+        "input.flv", format="flv"
+    )  # HLS does not work. See https://github.com/aiortc/aiortc/issues/331
 
-    def out_recorder_factory() -> MediaRecorder:
-        return MediaRecorder("output.flv", format="flv")
+def out_recorder_factory() -> MediaRecorder:
+    return MediaRecorder("output.flv", format="flv")
 
-    webrtc_streamer(
+webrtc_streamer(
         key="loopback",
         mode=WebRtcMode.SENDRECV,
         rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
@@ -69,11 +67,11 @@ def app():
         out_recorder_factory=out_recorder_factory,
     )
 
-    file = 'favicon.png'
-    favicon = Image.open(file)
+file = 'favicon.png'
+favicon = Image.open(file)
 
-    st.set_page_config(
-         page_title="AInigma LABS",
+st.set_page_config(
+        page_title="AInigma LABS",
         page_icon= 'https://ainigma.com.ar/media/favicon.png',
         layout="wide",
         initial_sidebar_state="expanded",
@@ -85,14 +83,14 @@ def app():
     )
 
 # Sidebar section
-    file = 'logo.png'
-    image = Image.open(file)
+file = 'logo.png'
+image = Image.open(file)
 
-    st.sidebar.image(image)
-    st.sidebar.write('## AInigma')
-    st.sidebar.write('### Gracias por confiar en nosotros!')
+st.sidebar.image(image)
+st.sidebar.write('## AInigma')
+st.sidebar.write('### Gracias por confiar en nosotros!')
 
-    '''
+'''
 # Conversor de Audio de voz a planilla Excel 
 
 ## Ingrese un audio y se formará un excel automáticamente.
@@ -101,76 +99,66 @@ def app():
 * Cualquier duración PESO MÁXIMO 200MB y se debe escuchar claro para evitar posibles errores (a más largo, más tardará en procesarlo).
 * Los formatos permitidos se indican debajo. Recomendado WAV.
 * Se deben indicar la cantidad de palabras por celda para cada columna y la cantidad de columnas totales 
-    '''
+'''
 
-    st.write('''
+st.write('''
 ### Al elegir la cantidad de palabras por celda debe tener en cuenta que cada columna debe tener la misma cantidad de datos (no se aceptan celdas vacías) y se deben completar la cantidad de palabras totales (se indican una vez cargado el audio)!
 ''')
 
-    audio_upload = st.file_uploader('Ingrese el audio en fomarto MP3, MP4, WAV, FLAC', type=['wav', 'mp3', 'mp4', 'flac'])
+audio_upload = st.file_uploader('Ingrese el audio en fomarto MP3, MP4, WAV, FLAC', type=['wav', 'mp3', 'mp4', 'flac'])
 
-    buttons = []
+buttons = []
 
-    AUDIO_FILE = audio_upload
+AUDIO_FILE = audio_upload
 
-    cant_columns = st.number_input('''Ingrese cuantas columnas quiere generar.
-            Tenga en cuenta que el número de columnas sea compatible con los datos que usted posee, por ejemplo si tiene 8 palabras, puede generar 1, 2, 4 u 8 columnas, variando también la cantidad de palabras por celda
-        ''', 1)
-    columns = {}
-    for i in range(cant_columns):
-        buttons.append(st.number_input('Ingrese la cantidad de palabras para las filas de la columna ' + str(i+1), 1))
-        columns[i] = []
-    if (AUDIO_FILE is not None):
-        r = sr.Recognizer()
-        with sr.AudioFile(AUDIO_FILE) as source:
-            audio = r.record(source)  # read the entire audio file
-        try:
-            txt = r.recognize_google(audio, language='es-ES')
-            st.write("Usted dijo: " + txt)
-            s = re.split('\s', txt)
-            st.write('La cantidad de datos es: ' + str(len(s)))
-            correct = st.button('Sí! Comenzar conversión')
-            not_correct = st.button('No :(. Intentar de nuevo')
-        except sr.UnknownValueError:
-            st.write("Imposible entender el audio. Pruebe de nuevo con otro")
-        except sr.RequestError as e:
-            st.write("Error de la API, por favor vuelva a intentar; {0}".format(e))
+cant_columns = st.number_input('''Ingrese cuantas columnas quiere generar.
+        Tenga en cuenta que el número de columnas sea compatible con los datos que usted posee, por ejemplo si tiene 8 palabras, puede generar 1, 2, 4 u 8 columnas, variando también la cantidad de palabras por celda
+    ''', 1)
+columns = {}
+for i in range(cant_columns):
+    buttons.append(st.number_input('Ingrese la cantidad de palabras para las filas de la columna ' + str(i+1), 1))
+    columns[i] = []
+if (AUDIO_FILE is not None):
+    r = sr.Recognizer()
+    with sr.AudioFile(AUDIO_FILE) as source:
+        audio = r.record(source)  # read the entire audio file
+    try:
+        txt = r.recognize_google(audio, language='es-ES')
+        st.write("Usted dijo: " + txt)
+        s = re.split('\s', txt)
+        st.write('La cantidad de datos es: ' + str(len(s)))
+        correct = st.button('Sí! Comenzar conversión')
+        not_correct = st.button('No :(. Intentar de nuevo')
+    except sr.UnknownValueError:
+        st.write("Imposible entender el audio. Pruebe de nuevo con otro")
+    except sr.RequestError as e:
+        st.write("Error de la API, por favor vuelva a intentar; {0}".format(e))
 
-        if (correct):
-            st.write('Espere mientras se genera la planilla')
-            column_pos, word, i, button_pos = 0, 0, 0, 0
-            while (i < len(s)):
-                tmp = ''
-                for j in range(int(buttons[button_pos])):
-                    tmp += word2num(s[word]) + ' '
-                    if (word + 1 < len(s)):
-                        word += 1
-                    else:
-                        break
-                columns[button_pos].append(tmp)
-                if (button_pos + 1 == cant_columns):
-                    button_pos = 0
+    if (correct):
+        st.write('Espere mientras se genera la planilla')
+        column_pos, word, i, button_pos = 0, 0, 0, 0
+        while (i < len(s)):
+            tmp = ''
+            for j in range(int(buttons[button_pos])):
+                tmp += word2num(s[word]) + ' '
+                if (word + 1 < len(s)):
+                    word += 1
                 else:
-                    button_pos += 1
-                i += buttons[button_pos]
-            df = pd.DataFrame()
-            for i in range(len(columns)):
-                if (len(columns[i]) > 0):
-                    df[i] = columns[i]
-            st.dataframe(df, width=1000)
-
-            towrite = io.BytesIO()
-            downloaded_file = df.to_excel(towrite, encoding='utf-8', index=False, header=True) # write to BytesIO buffer
-            towrite.seek(0)  # reset pointer
-            b64 = base64.b64encode(towrite.read()).decode() 
-            link= f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="Document.xlsx">Download excel file</a>'
-            st.markdown(link, unsafe_allow_html=True)
-
+                    break
+            columns[button_pos].append(tmp)
+            if (button_pos + 1 == cant_columns):
+                button_pos = 0
+            else:
+                button_pos += 1
+            i += buttons[button_pos]
+        df = pd.DataFrame()
+        for i in range(len(columns)):
+            if (len(columns[i]) > 0):
+                df[i] = columns[i]
+        st.dataframe(df, width=1000)
         
-        if (not_correct):
-            st.write(''' ## Vuelva a intentarlo o grabe otro audio por favor!''')
-if __name__ == "__main__":
-    app()
+    if (not_correct):
+        st.write(''' ## Vuelva a intentarlo o grabe otro audio por favor!''')
 
 
 #-------------------------
