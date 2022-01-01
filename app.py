@@ -73,7 +73,8 @@ from ipywebrtc import CameraStream, AudioRecorder
 start_record = st.button('''Click para comenzar a grabar''')
 
 if start_record:
-    recorder = AudioRecorder(filename=AUDIO_FILE, format='WAV')
+    recorder = AudioRecorder(stream=video)
+    st.write(record)
     recorder.recording = True
     finish_record = st.button('''Click para finalizar grabación''')
     if finish_record:
