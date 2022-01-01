@@ -4,6 +4,4 @@ pandas
 PILLOW==7.0.0
 pybase64
 requires.io
-numpy
-sounddevice
-scipy
+bokeh
