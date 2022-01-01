@@ -14,26 +14,6 @@ import os
 import librosa
 import glob
 
-import sounddevice as sd
-import wavio
-
-def read_audio(file):
-    with open(file, "rb") as audio_file:
-        audio_bytes = audio_file.read()
-    return audio_bytes
-
-def record(duration=5, fs=48000):
-    sd.default.samplerate = fs
-    sd.default.channels = 1
-    myrecording = sd.rec(int(duration * fs))
-    sd.wait(duration)
-    return myrecording
-
-def save_record(path_myrecording, myrecording, fs):
-    wavio.write(path_myrecording, myrecording, fs, sampwidth=2)
-    return None
-
-
 
 def word2num (num):
     numbers = {
@@ -104,8 +84,7 @@ if st.button(f"Click to Record"):
         myrecording = record(duration, fs)
         record_state.text(f"Saving sample as {filename}.mp3")
 
-        path_myrecording = f"./samples/{filename}.mp3"
-        st.download(myrecording)
+        path_myrecording = f"./Descargas/{filename}.mp3"
         save_record(path_myrecording, myrecording, fs)
         record_state.text(f"Done! Saved sample as {filename}.mp3")
 
