@@ -72,27 +72,15 @@ audio_upload = st.file_uploader('Ingrese el audio en fomarto MP3, MP4, WAV, FLAC
 
 buttons = []
 
-columns = {
-    0: [],
-    1: [],
-    2: [],
-    3: [],
-    4: [],
-    5: [],
-    6: [],
-    7: [],
-    8: [],
-    9: []
-}
-
 AUDIO_FILE = audio_upload
 
-cant_columns = st.slider('''Ingrese cuantas columnas quiere generar.
+cant_columns = st.number('''Ingrese cuantas columnas quiere generar.
             Tenga en cuenta que el número de columnas sea compatible con los datos que usted posee, por ejemplo si tiene 8 palabras, puede generar 1, 2, 4 u 8 columnas, variando también la cantidad de palabras por celda
-        ''', 1, 10, 2)
+        ''', 1)
+columns = {}
 for i in range(cant_columns):
     buttons.append(st.number_input('Ingrese la cantidad de palabras para las filas de la columna ' + str(i+1)))
-
+    columns.append([])
 if (AUDIO_FILE is not None):
     r = sr.Recognizer()
     with sr.AudioFile(AUDIO_FILE) as source:
