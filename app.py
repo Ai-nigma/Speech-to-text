@@ -14,7 +14,7 @@ import os
 import librosa
 import glob
 
-from helper import read_audio, record, save_record
+from helper import record, save_record
 
 
 def word2num (num):
