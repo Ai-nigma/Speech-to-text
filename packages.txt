@@ -4,4 +4,3 @@ build-essential
 libasound-dev 
 PortAudio19-dev
 python3-pyaudio
-libstdc++.so.6
