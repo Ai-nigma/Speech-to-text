@@ -13,7 +13,7 @@ import soundfile as sf
 import os
 import librosa
 import glob
-from helper import create_spectrogram, read_audio, record, save_record
+import helper
 
 
 def word2num (num):
