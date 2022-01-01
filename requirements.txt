@@ -6,3 +6,4 @@ pybase64
 requires.io
 numpy
 sounddevice
+scipy
