@@ -5,4 +5,3 @@ PILLOW==7.0.0
 pybase64
 requires.io
 waves
-python3-pyaudio
