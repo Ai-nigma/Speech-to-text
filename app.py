@@ -63,6 +63,61 @@ st.sidebar.write('### Gracias por confiar en nosotros!')
 * Se deben indicar la cantidad de palabras por celda para cada columna y la cantidad de columnas totales 
 '''
 
+# RECORD AUDIO
+
+import pyaudio
+import wave
+ 
+# Record in chunks of 1024 samples
+chunk = 1024 
+ 
+# 16 bits per sample
+sample_format = pyaudio.paInt16 
+chanels = 2
+ 
+# Record at 44400 samples per second
+smpl_rt = 44400 
+seconds = 4
+filename = "path_of_file.wav"
+ 
+# Create an interface to PortAudio
+pa = pyaudio.PyAudio() 
+
+record = st.button('''Comience a grabar el audio''')
+if record:
+    stream = pa.open(format=sample_format, channels=chanels,
+                 rate=smpl_rt, input=True,
+                 frames_per_buffer=chunk)
+ 
+    st.write('Grabando...')
+    finish_record = st.button('''Finalizar grabación''')
+# Initialize array that be used for storing frames
+    frames = [] 
+ 
+# Store data in chunks for 8 seconds
+    for i in range(0, int(smpl_rt / chunk * seconds)):
+        data = stream.read(chunk)
+        frames.append(data)
+ 
+
+ 
+# Save the recorded data in a .wav format
+    if finish_record:
+        # Stop and close the stream
+        stream.stop_stream()
+        stream.close()
+ 
+# Terminate - PortAudio interface
+        pa.terminate()
+        sf = wave.open(filename, 'wb')
+        sf.setnchannels(chanels)
+        sf.setsampwidth(pa.get_sample_size(sample_format))
+        sf.setframerate(smpl_rt)
+        sf.writeframes(b''.join(frames))
+        sf.close()
+
+# END RECORD AUDIO
+
 
 st.write('''
 ### Al elegir la cantidad de palabras por celda debe tener en cuenta que cada columna debe tener la misma cantidad de datos (no se aceptan celdas vacías) y se deben completar la cantidad de palabras totales (se indican una vez cargado el audio)!
