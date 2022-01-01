@@ -13,7 +13,7 @@ import soundfile as sf
 import os
 import librosa
 import glob
-import helper
+import helper import record, record_audio, save_record
 
 
 def word2num (num):
@@ -91,9 +91,6 @@ if st.button(f"Click to Record"):
         record_state.text(f"Done! Saved sample as {filename}.mp3")
 
         st.audio(read_audio(path_myrecording))
-
-        fig = create_spectrogram(path_myrecording)
-        st.pyplot(fig)
 # END RECORD
 
 
