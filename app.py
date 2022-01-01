@@ -74,7 +74,7 @@ buttons = []
 
 AUDIO_FILE = audio_upload
 
-cant_columns = st.number('''Ingrese cuantas columnas quiere generar.
+cant_columns = st.number_input('''Ingrese cuantas columnas quiere generar.
             Tenga en cuenta que el número de columnas sea compatible con los datos que usted posee, por ejemplo si tiene 8 palabras, puede generar 1, 2, 4 u 8 columnas, variando también la cantidad de palabras por celda
         ''', 1)
 columns = {}
