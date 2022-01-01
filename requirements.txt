@@ -6,5 +6,6 @@ pybase64
 requires.io
 numpy
 soundfile
-helper
+wavio
+sounddevice
 librosa
