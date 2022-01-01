@@ -105,7 +105,7 @@ if st.button(f"Click to Record"):
         record_state.text(f"Saving sample as {filename}.mp3")
 
         path_myrecording = f"./samples/{filename}.mp3"
-
+        st.download(myrecording)
         save_record(path_myrecording, myrecording, fs)
         record_state.text(f"Done! Saved sample as {filename}.mp3")
 
