@@ -9,3 +9,5 @@ soundfile
 wavio
 sounddevice
 librosa
+SoundFile
+urllib3
