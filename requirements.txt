@@ -6,5 +6,4 @@ pybase64
 requires.io
 numpy
 streamlit-webrtc
-av
 cv2
