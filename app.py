@@ -7,6 +7,15 @@ from PIL import Image
 import base64
 import io
 
+from pathlib import Path
+import numpy as np
+import soundfile as sf
+import os
+import librosa
+import glob
+from helper import draw_embed, create_spectrogram, read_audio, record, save_record
+
+
 def word2num (num):
     numbers = {
             'uno':1,'dos':2,"tres":3,"cuatro":4,
