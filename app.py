@@ -7,16 +7,6 @@ from PIL import Image
 import base64
 import io
 
-from pathlib import Path
-import numpy as np
-import soundfile as sf
-import os
-import librosa
-import glob
-
-from helper import record, save_record
-
-
 def word2num (num):
     numbers = {
             'uno':1,'dos':2,"tres":3,"cuatro":4,
@@ -72,27 +62,6 @@ st.sidebar.write('### Gracias por confiar en nosotros!')
 * Los formatos permitidos se indican debajo. Recomendado WAV.
 * Se deben indicar la cantidad de palabras por celda para cada columna y la cantidad de columnas totales 
 '''
-
-# RECORD AUDIO
-filename = st.text_input("Choose a filename: ")
-
-if st.button(f"Click to Record"):
-    if filename == "":
-        st.warning("Choose a filename.")
-    else:
-        record_state = st.text("Recording...")
-        duration = 5  # seconds
-        fs = 48000
-        myrecording = record(duration, fs)
-        record_state.text(f"Saving sample as {filename}.mp3")
-
-        path_myrecording = f"./Descargas/{filename}.mp3"
-        save_record(path_myrecording, myrecording, fs)
-        record_state.text(f"Done! Saved sample as {filename}.mp3")
-# END RECORD
-
-
-
 
 st.write('''
 ### Al elegir la cantidad de palabras por celda debe tener en cuenta que cada columna debe tener la misma cantidad de datos (no se aceptan celdas vacías) y se deben completar la cantidad de palabras totales (se indican una vez cargado el audio)!
