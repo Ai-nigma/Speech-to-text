@@ -16,6 +16,27 @@ from aiortc.contrib.media import MediaRecorder
 
 from streamlit_webrtc import VideoProcessorBase, WebRtcMode, webrtc_streamer
 
+def word2num (num):
+    numbers = {
+            'uno':1,'dos':2,"tres":3,"cuatro":4,
+            'cinco':5,'seis':6,'siete':7,'ocho':8,
+            'nueve':9,'zero':0,'diez':10,
+            'once':11, 'doce':12, 'trece':13, 'catorce':14, 'quince':15, 'dieciseis':16, 'diecisiete':17,
+            'dieciocho':18, 'diecinueve':19,
+            'veinte':20,'treinta':30,'cuarenta':40,
+            'cincuenta':50,'sesenta':60,'setenta':70,
+            'ochenta':80,'noventa':90
+        }
+    if (num in numbers):
+        return str(numbers[num])
+    else: 
+        return num
+    '''
+    try:
+        return int(num)
+    except:
+        return num
+    '''
 
 def app():
     class OpenCVEdgeProcessor(VideoProcessorBase):
@@ -47,36 +68,6 @@ def app():
         in_recorder_factory=in_recorder_factory,
         out_recorder_factory=out_recorder_factory,
     )
-    
-    
-def word2num (num):
-    numbers = {
-            'uno':1,'dos':2,"tres":3,"cuatro":4,
-            'cinco':5,'seis':6,'siete':7,'ocho':8,
-            'nueve':9,'zero':0,'diez':10,
-            'once':11, 'doce':12, 'trece':13, 'catorce':14, 'quince':15, 'dieciseis':16, 'diecisiete':17,
-            'dieciocho':18, 'diecinueve':19,
-            'veinte':20,'treinta':30,'cuarenta':40,
-            'cincuenta':50,'sesenta':60,'setenta':70,
-            'ochenta':80,'noventa':90
-        }
-    if (num in numbers):
-        return str(numbers[num])
-    else: 
-        return num
-    '''
-    try:
-        return int(num)
-    except:
-        return num
-    '''
-
-
-if __name__ == "__main__":
-    app()
-
-
-#-------------------------
 
     file = 'favicon.png'
     favicon = Image.open(file)
@@ -178,3 +169,8 @@ if __name__ == "__main__":
         
         if (not_correct):
             st.write(''' ## Vuelva a intentarlo o grabe otro audio por favor!''')
+if __name__ == "__main__":
+    app()
+
+
+#-------------------------
