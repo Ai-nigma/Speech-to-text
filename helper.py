@@ -3,11 +3,6 @@ from pathlib import Path
 import sounddevice as sd
 import wavio
 
-def read_audio(file):
-    with open(file, "rb") as audio_file:
-        audio_bytes = audio_file.read()
-    return audio_bytes
-
 def record(duration=5, fs=48000):
     sd.default.samplerate = fs
     sd.default.channels = 1
