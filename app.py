@@ -37,7 +37,7 @@ def word2num (num):
     except:
         return num
     '''
- class OpenCVEdgeProcessor(VideoProcessorBase):
+class OpenCVEdgeProcessor(VideoProcessorBase):
     def recv(self, frame: av.VideoFrame) -> av.VideoFrame:
         img = frame.to_ndarray(format="bgr24")
 
