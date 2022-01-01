@@ -80,7 +80,7 @@ cant_columns = st.number_input('''Ingrese cuantas columnas quiere generar.
 columns = {}
 for i in range(cant_columns):
     buttons.append(st.number_input('Ingrese la cantidad de palabras para las filas de la columna ' + str(i+1)))
-    columns.append([])
+    columns[i] = []
 if (AUDIO_FILE is not None):
     r = sr.Recognizer()
     with sr.AudioFile(AUDIO_FILE) as source:
