@@ -2,5 +2,5 @@ libasound2-dev
 libsndfile1-dev
 build-essential
 libasound-dev 
-PortAudio19-dev
+portaudio19-dev
 python3-pyaudio
