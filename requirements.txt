@@ -4,5 +4,6 @@ pandas
 PILLOW==7.0.0
 pybase64
 requires.io
-PyAudio
-waves
+numpy
+soundfile
+helper
