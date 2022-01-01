@@ -102,8 +102,8 @@ if (AUDIO_FILE is not None):
         st.write("Usted dijo: " + txt)
         s = re.split('\s', txt)
         st.write('La cantidad de datos es: ' + str(len(s)))
-        correct = st.button('Sí!')
-        not_correct = st.button('No :(')
+        correct = st.button('Sí! Comenzar conversión')
+        not_correct = st.button('No :(. Intentar de nuevo')
     except sr.UnknownValueError:
         st.write("Imposible entender el audio. Pruebe de nuevo con otro")
     except sr.RequestError as e:
