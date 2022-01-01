@@ -60,12 +60,12 @@ st.sidebar.write('### Gracias por confiar en nosotros!')
 ### El formato debe ser:
 * Cualquier duración PESO MÁXIMO 200MB y se debe escuchar claro para evitar posibles errores (a más largo, más tardará en procesarlo).
 * Los formatos permitidos se indican debajo. Recomendado WAV.
-* Se deben indicar la cantidad de palabras por filas y la cantidad de columnas totales 
+* Se deben indicar la cantidad de palabras por celda para cada columna y la cantidad de columnas totales 
 '''
 
 
 st.write('''
-### Al elegir la cantidad de palabras por fila debe tener en cuenta que cada columna debe tener la misma cantidad de datos y se deben completar la cantidad de palabras totales (se indican una vez cargado el audio)!
+### Al elegir la cantidad de palabras por celda debe tener en cuenta que cada columna debe tener la misma cantidad de datos (no se aceptan celdas vacías) y se deben completar la cantidad de palabras totales (se indican una vez cargado el audio)!
 ''')
 
 audio_upload = st.file_uploader('Ingrese el audio en fomarto MP3, MP4, WAV, FLAC', type=['wav', 'mp3', 'mp4', 'flac'])
