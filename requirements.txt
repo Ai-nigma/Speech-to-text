@@ -7,3 +7,4 @@ requires.io
 numpy
 soundfile
 helper
+os
