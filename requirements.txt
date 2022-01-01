@@ -1,0 +1,7 @@
+speech_recognition
+re
+streamlit
+pandas
+PILLOW
+base64
+io
