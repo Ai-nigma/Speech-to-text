@@ -16,6 +16,30 @@ from aiortc.contrib.media import MediaRecorder
 
 from streamlit_webrtc import VideoProcessorBase, WebRtcMode, webrtc_streamer
 
+
+file = 'favicon.png'
+favicon = Image.open(file)
+
+st.set_page_config(
+        page_title="AInigma LABS",
+        page_icon= 'https://ainigma.com.ar/media/favicon.png',
+        layout="wide",
+        initial_sidebar_state="expanded",
+        menu_items={
+             'Get Help': 'https://www.instagram.com/Ainigma.labs',
+             'Report a bug': "https://www.ainigma.com.ar",
+            'About': "# AInigma LABS. Soluciones a tus problemas!"
+        }
+    )
+
+# Sidebar section
+file = 'logo.png'
+image = Image.open(file)
+
+st.sidebar.image(image)
+st.sidebar.write('## AInigma')
+st.sidebar.write('### Gracias por confiar en nosotros!')
+
 def word2num (num):
     numbers = {
             'uno':1,'dos':2,"tres":3,"cuatro":4,
@@ -67,28 +91,6 @@ webrtc_streamer(
         out_recorder_factory=out_recorder_factory,
     )
 
-file = 'favicon.png'
-favicon = Image.open(file)
-
-st.set_page_config(
-        page_title="AInigma LABS",
-        page_icon= 'https://ainigma.com.ar/media/favicon.png',
-        layout="wide",
-        initial_sidebar_state="expanded",
-        menu_items={
-             'Get Help': 'https://www.instagram.com/Ainigma.labs',
-             'Report a bug': "https://www.ainigma.com.ar",
-            'About': "# AInigma LABS. Soluciones a tus problemas!"
-        }
-    )
-
-# Sidebar section
-file = 'logo.png'
-image = Image.open(file)
-
-st.sidebar.image(image)
-st.sidebar.write('## AInigma')
-st.sidebar.write('### Gracias por confiar en nosotros!')
 
 '''
 # Conversor de Audio de voz a planilla Excel 
