@@ -64,9 +64,26 @@ st.sidebar.write('### Gracias por confiar en nosotros!')
 '''
 
 # RECORD AUDIO
+from IPython.display import Audio
+from ipywebrtc import CameraStream, AudioRecorder
 
+# actually I found this hack in some js code
+# just pass mime type =)
+camera = CameraStream(constraints={'audio': True,
+                                   'video': False},
+                      mimeType='audio/wav')
+recorder = AudioRecorder(stream=camera)
 
+start_record = st.button('''Click para comenzar a grabar''')
 
+if start_record:
+    recorder.recording = True
+    finish_record = st.button('''Click para finalizar grabación''')
+    if finish_record:
+        recorder.recording = False
+        recorder.save('test.wav')
+
+# END RECORD
 st.write('''
 ### Al elegir la cantidad de palabras por celda debe tener en cuenta que cada columna debe tener la misma cantidad de datos (no se aceptan celdas vacías) y se deben completar la cantidad de palabras totales (se indican una vez cargado el audio)!
 ''')
