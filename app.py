@@ -64,24 +64,51 @@ st.sidebar.write('### Gracias por confiar en nosotros!')
 '''
 
 # RECORD AUDIO
-from IPython.display import Audio
-from ipywebrtc import CameraStream, AudioRecorder
+import pyaudio
+import wave
 
-# actually I found this hack in some js code
-# just pass mime type =)
+#DEFINIMOS PARAMETROS
+FORMAT=pyaudio.paInt16
+CHANNELS=2
+RATE=44100
+CHUNK=1024
+archivo="grabacion.wav"
 
-start_record = st.button('''Click para comenzar a grabar''')
+#INICIAMOS "pyaudio"
+audio=pyaudio.PyAudio()
+
+#INICIAMOS GRABACIÓN
+start_record = st.button('''Click para iniciar grabación''')
 
 if start_record:
-    recorder = AudioRecorder(stream=video)
-    st.write(record)
-    recorder.recording = True
-    finish_record = st.button('''Click para finalizar grabación''')
-    if finish_record:
-        recorder.recording = False
-        AUDIO_FILE = recorder.save('test.wav')
+    stream=audio.open(format=FORMAT,channels=CHANNELS,
+                    rate=RATE, input=True,
+                    frames_per_buffer=CHUNK)
+    st.write('Grabando')
+    frames=[]
 
+    data=stream.read(CHUNK)
+    frames.append(data)
+    
+    finish_record = st.button('Click para detener grabación')
+    if finish_record:
+#DETENEMOS GRABACIÓN
+        stream.stop_stream()
+        stream.close()
+        audio.terminate()
+
+#CREAMOS/GUARDAMOS EL ARCHIVO DE AUDIO
+        waveFile = wave.open(archivo, 'wb')
+        waveFile.setnchannels(CHANNELS)
+        waveFile.setsampwidth(audio.get_sample_size(FORMAT))
+        waveFile.setframerate(RATE)
+        waveFile.writeframes(b''.join(frames))
+        waveFile.close()
 # END RECORD
+
+
+
+
 st.write('''
 ### Al elegir la cantidad de palabras por celda debe tener en cuenta que cada columna debe tener la misma cantidad de datos (no se aceptan celdas vacías) y se deben completar la cantidad de palabras totales (se indican una vez cargado el audio)!
 ''')
