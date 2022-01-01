@@ -3,4 +3,4 @@ streamlit==1.3.1
 pandas
 PILLOW==7.0.0
 pybase64
-io
+requires.io
