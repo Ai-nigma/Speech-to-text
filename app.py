@@ -59,7 +59,7 @@ st.sidebar.write('### Gracias por confiar en nosotros!')
 
 ### El formato debe ser:
 * Cualquier duración PESO MÁXIMO 200MB y se debe escuchar claro para evitar posibles errores (a más largo, más tardará en procesarlo).
-* Los formatos permitidos se indican debajo
+* Los formatos permitidos se indican debajo. Recomendado WAV.
 * Se deben indicar la cantidad de palabras por filas y la cantidad de columnas totales 
 '''
 
