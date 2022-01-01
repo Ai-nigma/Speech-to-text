@@ -69,19 +69,16 @@ from ipywebrtc import CameraStream, AudioRecorder
 
 # actually I found this hack in some js code
 # just pass mime type =)
-camera = CameraStream(constraints={'audio': True,
-                                   'video': False},
-                      mimeType='audio/wav')
-recorder = AudioRecorder(stream=camera)
 
 start_record = st.button('''Click para comenzar a grabar''')
 
 if start_record:
+    recorder = AudioRecorder(stream=camera, filename=AUDIO_FILE, format='WAV')
     recorder.recording = True
     finish_record = st.button('''Click para finalizar grabación''')
     if finish_record:
         recorder.recording = False
-        recorder.save('test.wav')
+        AUDIO_FILE = recorder.save('test.wav')
 
 # END RECORD
 st.write('''
