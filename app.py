@@ -89,8 +89,6 @@ if st.button(f"Click to Record"):
         path_myrecording = f"./Descargas/{filename}.mp3"
         save_record(path_myrecording, myrecording, fs)
         record_state.text(f"Done! Saved sample as {filename}.mp3")
-
-        st.audio(read_audio(path_myrecording))
 # END RECORD
 
 
