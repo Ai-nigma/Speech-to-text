@@ -75,7 +75,7 @@ def word2num (num):
 # with open(file_, 'r', encoding='utf-8') as f:
 #     lottie_json = json.load(f)
 
-TMP_DIR = Path('temp')
+TMP_DIR = Path('Descargas')
 if not TMP_DIR.exists():
     TMP_DIR.mkdir(exist_ok=True, parents=True)
 
@@ -99,8 +99,8 @@ def aiortc_audio_recorder(wavpath):
 
     webrtc_ctx: WebRtcStreamerContext = webrtc_streamer(
         key="sendonly-audio",
-        # mode=WebRtcMode.SENDONLY,
-        mode=WebRtcMode.SENDRECV,
+        mode=WebRtcMode.SENDONLY,
+        # mode=WebRtcMode.SENDRECV,
         in_recorder_factory=recorder_factory,
         media_stream_constraints=MEDIA_STREAM_CONSTRAINTS,
     )
