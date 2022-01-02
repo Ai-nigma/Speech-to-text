@@ -4,9 +4,6 @@ import re
 import pandas as pd
 from PIL import Image
 
-import base64
-import io
-
 #-------------------------
 from streamlit_webrtc import (
     webrtc_streamer,
@@ -185,6 +182,42 @@ def record_page():
         st.markdown(wavpath)
         display_wavfile(wavpath)
         plot_wav(wavpath)
+record_page()
+
+def process_info(s: list):
+    st.write('Espere mientras se genera la planilla')
+    word, i, button_pos = 0, 0, 0
+    while (i < len(s)):
+        tmp = ''
+        for j in range(int(buttons[button_pos])):
+            tmp += word2num(s[word]) + ' '
+            if (word + 1 < len(s)):
+                word += 1
+            else:
+                break
+        columns[button_pos].append(tmp)
+        if (button_pos + 1 == cant_columns):
+            button_pos = 0
+        else:
+            button_pos += 1
+        i += buttons[button_pos]
+    df = pd.DataFrame()
+    for i in range(len(columns)):
+        if (len(columns[i]) > 0):
+            df[i] = columns[i]
+    st.dataframe(df, width=1000)
+    @st.cache
+    def convert_df(df):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+        return df.to_csv().encode('utf-8')
+    csv = convert_df(df)
+    st.download_button(
+        label="Download data as CSV",
+        data=csv,
+        file_name='data.csv',
+        mime='text/csv',
+    )
+    
 '''
 # Conversor de Audio de voz a planilla CSV 
 
@@ -203,6 +236,8 @@ st.write('''
 audio_upload = st.file_uploader('Ingrese el audio en fomarto MP3, MP4, WAV, FLAC', type=['wav', 'mp3', 'mp4', 'flac'])
 
 buttons = []
+pos_error = []
+text_error = []
 
 AUDIO_FILE = audio_upload
 
@@ -222,52 +257,27 @@ if (AUDIO_FILE is not None):
         st.write("Usted dijo: " + txt)
         s = re.split('\s', txt)
         st.write('La cantidad de datos es: ' + str(len(s)))
-        correct = st.button('Sí! Comenzar conversión')
-        not_correct = st.button('No :(. Intentar de nuevo')
+        correct = st.button('Confirmar transcripción')
+        if (correct):
+            process_info(s)
+        else:
+            st.write(''' ## Corregir errores manualmente: ''')
+            cant_error = st.number_input('''Ingrese la cantidad de palabras incorrectas''', 0)
+            for i in range(int(cant_error)):
+                    pos_error.append(st.number_input('''Ingrese la posición de la palabra ''' + str(i + 1), 1))
+                    text_error.append(st.text_input('Ingrese la palabra correcta ' + str(i + 1)))
+            if (len(pos_error) > 0):
+                new_s = s
+                for i in range(len(pos_error)):
+                    new_s[pos_error[i] - 1] = text_error[i]
+                process_info(new_s)
     except sr.UnknownValueError:
         st.write("Imposible entender el audio. Pruebe de nuevo con otro")
+        boolean = False
+        boolean_handle_error = False
     except sr.RequestError as e:
         st.write("Error de la API, por favor vuelva a intentar; {0}".format(e))
-
-    if (correct):
-        st.write('Espere mientras se genera la planilla')
-        column_pos, word, i, button_pos = 0, 0, 0, 0
-        while (i < len(s)):
-            tmp = ''
-            for j in range(int(buttons[button_pos])):
-                tmp += word2num(s[word]) + ' '
-                if (word + 1 < len(s)):
-                    word += 1
-                else:
-                    break
-            columns[button_pos].append(tmp)
-            if (button_pos + 1 == cant_columns):
-                button_pos = 0
-            else:
-                button_pos += 1
-            i += buttons[button_pos]
-        df = pd.DataFrame()
-        for i in range(len(columns)):
-            if (len(columns[i]) > 0):
-                df[i] = columns[i]
-        st.dataframe(df, width=1000)
-        @st.cache
-        def convert_df(df):
-        # IMPORTANT: Cache the conversion to prevent computation on every rerun
-            return df.to_csv().encode('utf-8')
-
-        csv = convert_df(df)
-
-        st.download_button(
-            label="Download data as CSV",
-            data=csv,
-            file_name='data.csv',
-            mime='text/csv',
-        )
-    if (not_correct):
-        st.write(''' ## Vuelva a intentarlo o grabe otro audio por favor!''')
+        boolean = False
+        boolean_handle_error = False
 
 
-#-------------------------
-if __name__ == "__main__":
-    record_page()
