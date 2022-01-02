@@ -211,7 +211,7 @@ cant_columns = st.number_input('''Ingrese cuantas columnas quiere generar.
         Tenga en cuenta que el número de columnas sea compatible con los datos que usted posee, por ejemplo si tiene 8 palabras, puede generar 1, 2, 4 u 8 columnas, variando también la cantidad de palabras por celda
     ''', 1)
 columns = {}
-for i in range(cant_columns):
+for i in range(int(cant_columns)):
     buttons.append(st.number_input('Ingrese la cantidad de palabras para las filas de la columna ' + str(i+1), 1))
     columns[i] = []
 if (AUDIO_FILE is not None):
