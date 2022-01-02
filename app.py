@@ -170,6 +170,7 @@ def plot_wav(wavpath):
 
 
 def record_page():
+    st.write('En construcción')
     st.markdown('# Grabadora de voz')
     if "wavpath" not in st.session_state:
         cur_time = time.strftime("%Y-%m-%d_%H:%M:%S", time.localtime())
@@ -186,9 +187,9 @@ def record_page():
         display_wavfile(wavpath)
         plot_wav(wavpath)
 '''
-# Conversor de Audio de voz a planilla Excel 
+# Conversor de Audio de voz a planilla CSV 
 
-## Ingrese un audio y se formará un excel automáticamente.
+## Ingrese un audio y se formará un CSV automáticamente.
 
 ### El formato debe ser:
 * Cualquier duración PESO MÁXIMO 200MB y se debe escuchar claro para evitar posibles errores (a más largo, más tardará en procesarlo).
@@ -251,7 +252,19 @@ if (AUDIO_FILE is not None):
             if (len(columns[i]) > 0):
                 df[i] = columns[i]
         st.dataframe(df, width=1000)
-        
+        @st.cache
+        def convert_df(df):
+        # IMPORTANT: Cache the conversion to prevent computation on every rerun
+            return df.to_csv().encode('utf-8')
+
+        csv = convert_df(df)
+
+        st.download_button(
+            label="Download data as CSV",
+            data=csv,
+            file_name='data.csv',
+            mime='text/csv',
+        )
     if (not_correct):
         st.write(''' ## Vuelva a intentarlo o grabe otro audio por favor!''')
 
