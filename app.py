@@ -11,7 +11,7 @@ import io
 from streamlit_webrtc import (
     webrtc_streamer,
     WebRtcMode,
-    WebRtcStreamerContext,
+    WebRtcStreamerContext
 )
 from aiortc.contrib.media import MediaRecorder
 import soundfile as sf
@@ -76,7 +76,7 @@ import json
 # with open(file_, 'r', encoding='utf-8') as f:
 #     lottie_json = json.load(f)
 
-TMP_DIR = Path('temp')
+TMP_DIR = Path('Descargas')
 if not TMP_DIR.exists():
     TMP_DIR.mkdir(exist_ok=True, parents=True)
 
