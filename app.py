@@ -170,7 +170,7 @@ def plot_wav(wavpath):
 
 
 def record_page():
-    st.markdown('# recorder')
+    st.markdown('# Grabadora de voz')
     if "wavpath" not in st.session_state:
         cur_time = time.strftime("%Y-%m-%d_%H:%M:%S", time.localtime())
         tmp_wavpath = TMP_DIR / f'{cur_time}.wav'
@@ -178,8 +178,8 @@ def record_page():
 
     wavpath = st.session_state["wavpath"]
 
-    aiortc_audio_recorder(wavpath)  # first way
-    # save_frames_from_audio_receiver(wavpath)  # second way
+    # aiortc_audio_recorder(wavpath)  # first way
+    save_frames_from_audio_receiver(wavpath)  # second way
 
     if Path(wavpath).exists():
         st.markdown(wavpath)
