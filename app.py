@@ -178,8 +178,8 @@ def record_page():
 
     wavpath = st.session_state["wavpath"]
 
-    # aiortc_audio_recorder(wavpath)  # first way
-    save_frames_from_audio_receiver(wavpath)  # second way
+    aiortc_audio_recorder(wavpath)  # first way
+    # save_frames_from_audio_receiver(wavpath)  # second way
 
     if Path(wavpath).exists():
         st.markdown(wavpath)
