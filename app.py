@@ -100,8 +100,8 @@ def aiortc_audio_recorder(wavpath):
 
     webrtc_ctx: WebRtcStreamerContext = webrtc_streamer(
         key="sendonly-audio",
-        # mode=WebRtcMode.SENDONLY,
-        mode=WebRtcMode.SENDRECV,
+        mode=WebRtcMode.SENDONLY,
+        # mode=WebRtcMode.SENDRECV,
         in_recorder_factory=recorder_factory,
         media_stream_constraints=MEDIA_STREAM_CONSTRAINTS,
     )
@@ -178,8 +178,8 @@ def record_page():
 
     wavpath = st.session_state["wavpath"]
 
-    aiortc_audio_recorder(wavpath)  # first way
-    # save_frames_from_audio_receiver(wavpath)  # second way
+    # aiortc_audio_recorder(wavpath)  # first way
+    save_frames_from_audio_receiver(wavpath)  # second way
 
     if Path(wavpath).exists():
         st.markdown(wavpath)
