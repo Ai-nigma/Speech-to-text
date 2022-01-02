@@ -60,7 +60,8 @@ def word2num (num):
         return int(num)
     except:
         return num
-    '''def main():
+    '''
+def main():
     webrtc_ctx = webrtc_streamer(
         key="sendonly-audio",
         mode=WebRtcMode.SENDONLY,
