@@ -6,5 +6,6 @@ pybase64
 requires.io
 numpy
 streamlit-webrtc
-opencv-python-headless
 pydub
+soundfile
+matplotlib.pyplot
