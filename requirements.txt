@@ -7,3 +7,4 @@ requires.io
 numpy
 streamlit-webrtc
 opencv-python-headless
+pydub
