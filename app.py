@@ -170,8 +170,7 @@ def plot_wav(wavpath):
 
 
 def record_page():
-    st.write('En construcción')
-    st.markdown('# Grabadora de voz')
+    st.markdown('## Grabadora de voz (en construcción)')
     if "wavpath" not in st.session_state:
         cur_time = time.strftime("%Y-%m-%d_%H:%M:%S", time.localtime())
         tmp_wavpath = TMP_DIR / f'{cur_time}.wav'
