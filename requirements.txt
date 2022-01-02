@@ -8,4 +8,4 @@ numpy
 streamlit-webrtc
 pydub
 soundfile
-matplotlib.pyplot
+matplotlib
