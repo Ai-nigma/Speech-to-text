@@ -15,9 +15,7 @@ import pydub
 import av
 import cv2
 from aiortc.contrib.media import MediaRecorder
-
-from streamlit_webrtc import VideoProcessorBase, WebRtcMode, webrtc_streamer
-
+from streamlit_webrtc import webrtc_streamer, WebRtcMode, ClientSettings
 
 file = 'favicon.png'
 favicon = Image.open(file)
