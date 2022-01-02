@@ -9,7 +9,9 @@ import io
 
 #-------------------------
 
+import queue
 
+import pydub
 import av
 import cv2
 from aiortc.contrib.media import MediaRecorder
@@ -61,13 +63,6 @@ def word2num (num):
     except:
         return num
     '''
-import queue
-
-import pydub
-
-import streamlit as st
-from streamlit_webrtc import webrtc_streamer, WebRtcMode, ClientSettings
-
 
 def main():
     webrtc_ctx = webrtc_streamer(
@@ -124,7 +119,7 @@ def main():
         # Reset
         st.session_state["audio_buffer"] = pydub.AudioSegment.empty()
 
-
+main()
 '''
 # Conversor de Audio de voz a planilla Excel 
 
