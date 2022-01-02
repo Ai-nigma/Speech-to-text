@@ -69,13 +69,14 @@ def word2num (num):
     except:
         return num
     '''
-
+# from streamlit_lottie import st_lottie
+import json
 
 # file_ = '16581-audio.json'
 # with open(file_, 'r', encoding='utf-8') as f:
 #     lottie_json = json.load(f)
 
-TMP_DIR = Path('Descargas')
+TMP_DIR = Path('temp')
 if not TMP_DIR.exists():
     TMP_DIR.mkdir(exist_ok=True, parents=True)
 
@@ -99,8 +100,8 @@ def aiortc_audio_recorder(wavpath):
 
     webrtc_ctx: WebRtcStreamerContext = webrtc_streamer(
         key="sendonly-audio",
-        mode=WebRtcMode.SENDONLY,
-        # mode=WebRtcMode.SENDRECV,
+        # mode=WebRtcMode.SENDONLY,
+        mode=WebRtcMode.SENDRECV,
         in_recorder_factory=recorder_factory,
         media_stream_constraints=MEDIA_STREAM_CONSTRAINTS,
     )
@@ -168,7 +169,7 @@ def plot_wav(wavpath):
     st.pyplot(fig)
 
 
-def main():
+def record_page():
     st.markdown('# recorder')
     if "wavpath" not in st.session_state:
         cur_time = time.strftime("%Y-%m-%d_%H:%M:%S", time.localtime())
@@ -177,15 +178,13 @@ def main():
 
     wavpath = st.session_state["wavpath"]
 
-    # aiortc_audio_recorder(wavpath)  # first way
-    save_frames_from_audio_receiver(wavpath)  # second way
+    aiortc_audio_recorder(wavpath)  # first way
+    # save_frames_from_audio_receiver(wavpath)  # second way
 
     if Path(wavpath).exists():
         st.markdown(wavpath)
         display_wavfile(wavpath)
         plot_wav(wavpath)
-        
-main()
 '''
 # Conversor de Audio de voz a planilla Excel 
 
@@ -258,3 +257,5 @@ if (AUDIO_FILE is not None):
 
 
 #-------------------------
+if __name__ == "__main__":
+    record_page()
