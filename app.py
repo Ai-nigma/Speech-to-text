@@ -264,8 +264,8 @@ if (AUDIO_FILE is not None):
             st.write(''' ## Corregir errores manualmente: ''')
             cant_error = st.number_input('''Ingrese la cantidad de palabras incorrectas''', 0)
             for i in range(int(cant_error)):
-                    pos_error.append(st.number_input('''Ingrese la posición de la palabra ''' + str(i + 1), 1))
-                    text_error.append(st.text_input('Ingrese la palabra correcta ' + str(i + 1)))
+                    pos_error.append(st.number_input('''Ingrese la posición de la palabra ''' + str(i), 1))
+                    text_error.append(st.text_input('Ingrese la palabra correcta ' + str(i)))
             if (len(pos_error) > 0):
                 new_s = s
                 for i in range(len(pos_error)):
@@ -279,5 +279,3 @@ if (AUDIO_FILE is not None):
         st.write("Error de la API, por favor vuelva a intentar; {0}".format(e))
         boolean = False
         boolean_handle_error = False
-
-
