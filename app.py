@@ -37,14 +37,6 @@ st.set_page_config(
         }
     )
 
-# Sidebar section
-file = 'logo.png'
-image = Image.open(file)
-
-st.sidebar.image(image)
-st.sidebar.write('## AInigma')
-st.sidebar.write('### Gracias por confiar en nosotros!')
-
 def word2num (num):
     numbers = {
             'uno':1,'dos':2,"tres":3,"cuatro":4,
